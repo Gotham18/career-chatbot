@@ -10,13 +10,14 @@ from textblob import TextBlob
 import nltk
 import pickle
 import re
+from nltk.tokenize import sent_tokenize
+
 
 
 # %%
 # Set NLTK path and load data
-nltk.data.path.append("C:/Users/admin/Downloads/nltk_data")
-with open("C:/Users/admin/Downloads/nltk_data/tokenizers/punkt/english.pickle", "rb") as f:
-    sentence_tokenizer = pickle.load(f)
+nltk.download('punkt')
+nltk.download('stopwords')
 
 # %%
 word_tokenizer = TreebankWordTokenizer()
