@@ -1,0 +1,8 @@
+streamlit
+pandas
+prince
+matplotlib
+xlsxwriter
+scikit-learn
+nltk
+textblob
