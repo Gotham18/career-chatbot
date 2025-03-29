@@ -6,3 +6,8 @@ xlsxwriter
 scikit-learn
 nltk
 textblob
+streamlit
+sentence-transformers
+torch
+
+
