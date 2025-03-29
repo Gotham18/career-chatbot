@@ -73,6 +73,12 @@ labels = list(intent_responses.keys())
 question_embeddings = embedder.encode(questions, convert_to_tensor=True)
 
 # Helpers
+import re
+
+def clean_query(query):
+    query = query.lower()
+    query = re.sub(r"gotham['’]s|gothams", "your", query)
+    return query.strip()
 def is_followup(query):
     return any(f in query.lower() for f in ["what about before", "tell me more", "and", "before that", "what else"])
 
@@ -92,7 +98,7 @@ def smart_predict(query, threshold=0.5):
     if is_followup(query) and st.session_state.last_intent:
         return select_response(st.session_state.last_intent, query + " follow-up")
 
-    embedding = embedder.encode(query, convert_to_tensor=True)
+    embedding = embedder.encode(clean_query(query), convert_to_tensor=True)
     hit = util.semantic_search(embedding, question_embeddings, top_k=1)[0][0]
     score = hit["score"]
     intent = labels[hit["corpus_id"]]
